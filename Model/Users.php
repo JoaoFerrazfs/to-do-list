@@ -7,6 +7,14 @@ class User{
      * @var PDO
      */
 
+     private $nome;
+     private $age;
+     private $email;
+     private $fone;
+     private $password;
+
+
+
     private $conexao;
 
     public function __construct()
@@ -19,16 +27,20 @@ class User{
         }
     }
 
-    public function list():array
+    public function list($email,$password):array
     {
-        $sql='select * from users';
-        $user=[];
+        $user = [];
+        $sql = "SELECT id,name,age,email,fone,password FROM users WHERE email='$email' and password='$password'";
         foreach ($this->conexao->query($sql) as $key => $value) {
-            array_push($user,$value);
-
+            array_push($user, $value);
+            
+        }
         return $user;
+
+        
+           
+       
     }
 
 
-}
 }
