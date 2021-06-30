@@ -6,8 +6,8 @@ class User{
     /**
      * @var PDO
      */
-
-     private $nome;
+     private $id;
+     private $name;
      private $age;
      private $email;
      private $fone;
@@ -25,22 +25,77 @@ class User{
             echo $e->getMessage();
             die();
         }
+
+
     }
 
-    public function list($email,$password):array
+    public function getId(){
+        return $this->id;
+
+    }
+    public function setId($i){
+        $this->id = $i;
+
+    }
+    public function setName($n){
+        $this->name = $n;
+
+    }
+    public function getName(){
+        return $this->name;
+
+    }    
+
+    public function getAge(){
+        return $this->age;
+
+    }
+    public function setAge($a){
+        $this->age = $a;
+
+    }
+    public function getEmail(){
+        return $this->email;
+
+    }
+    public function setEmail($e){
+        $this->email = $e;
+
+    }
+    public function getPassword(){
+        return $this->password;
+
+    }
+    public function setPassword($p){
+        $this->password = $p;
+
+    }
+
+
+
+    public function validarLogin($email,$password)
     {
-        $user = [];
         $sql = "SELECT id,name,age,email,fone,password FROM users WHERE email='$email' and password='$password'";
-        foreach ($this->conexao->query($sql) as $key => $value) {
-            array_push($user, $value);
-            
-        }
-        return $user;
+        foreach ($this->conexao->query($sql) as $key => $value) {            
+            $logar=new User();
+            $logar->setId($value['id']);
+            $logar->setName($value['name']);
+            $logar->setEmail($value['email']);
+            $logar->setAge($value['age']);
+            $logar->setPassword($value['password']);
 
-        
-           
-       
+            $id=$logar->getId();
+            $name=$logar->getName();
+            $email=$logar->getEmail();
+            $password=$logar->getPassword();
+
+          return array($id,$name,$email,$password);
+            
+
     }
 
+   
+           
 
-}
+
+}}

@@ -11,36 +11,32 @@
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 
-<?php
-
-require_once('../to-do-list/Controller/ValidationLogin.php');
-
-$validacao = new  login;
-
-$teste1 = "joaoferrazp@gmail.com";
-$teste2 = "97283901";
-
-echo "<form method=POST> 
+<?php session_start();?>
+                    
+                        
+<form method=POST action="./Controller/ValidationLogin.php" > 
 
 <p>Email </p>
 <input type='email' name='email'>
+
 <p>Senha </p>
 <input type='text' name='password'>
 
 <input type='submit' name='submeter' value='Testar'>
 
-
-</form>";
-
-if (empty($_POST['testar'])){
-    $validacao->validarLogin($_POST['email'], $_POST['password']);
-}  
-    
-
-
-
-
-?>
+<?php
+                           if(isset($_SESSION['nao_autenticado'])):
+                         ?>       
+                        <div class="notificacaoDeErro">
+                            <p>Usuário ou senha inválidos</p>
+                        </div>
+                        <?php                        
+                        endif;
+                        unset($_SESSION['nao_autenticado']);
+                        ?>
 
 
-</html>
+</form>
+
+
+

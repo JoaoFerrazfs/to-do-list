@@ -1,45 +1,49 @@
 <?php
-require'./Model/Users.php';
-require_once('../to-do-list/index.php');
+session_start();
+
+define('__ROOT__', dirname(dirname(__FILE__)));
+require_once (__ROOT__.'./Model/Users.php');
 
 
 
+$teste=  new Login();
+$teste->sessao($_POST['email'],$_POST['password']);
 class Login{
-    private $dadosUser;
+  
     public function __construct()
     {
-        $this->dadosUser= new User();
+        $dadosUser= new User();
         
-    }
+    }    
+    public function sessao($email,$password){
+
+        
+        $dados=new User();
+        $gravar=[];
+        $gravar= $dados->validarLogin($email,$password);
+
+        $_SESSION['usuario'] =$gravar[1];        
+
+        if(isset($_SESSION['usuario'])){
+
+              echo"Usuário  ". $_SESSION['usuario']." logado com sucesso";
+            
+        }else{
+            $_SESSION['nao_autenticado'] = true;
+            header('Location: http://localhost/to-do-list/');    
+            exit();
+        }
+
+      
+        
+        
+        
+
+  
+        
 
 
     
-    public function validarLogin($email,$password){
-        foreach ($this->dadosUser->list($email,$password) as $value)
-        {
-       $value['id'];
-       $value['name'];
-        }
-
-        try{   
-            if (empty($value['id'])){
-        
-            throw new Exception("Campos obrigatórios não foram preenchidos!");
-            
-            }
-            
-         
-
-            }catch(Exception $e){
-            echo $e->getMessage();
-            return false;
-           
-            die();
-        }
-        echo "Login Relizado ".$value['name'];
-        return true;
-        }
-        
-}
 
 
+}}
