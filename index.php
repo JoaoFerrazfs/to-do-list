@@ -16,10 +16,10 @@
                         
 <form method=POST action="./Controller/ValidationLogin.php" > 
 
-<p>Email </p>
+<p>Email</p>
 <input type='email' name='email'>
 
-<p>Senha </p>
+<p>Senha</p>
 <input type='text' name='password'>
 
 <input type='submit' name='submeter' value='Testar'>
