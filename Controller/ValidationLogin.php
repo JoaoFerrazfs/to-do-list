@@ -22,9 +22,12 @@ class Login{
         $gravar=[];
         $gravar= $dados->validarLogin($email,$password);
 
-        $_SESSION['usuario'] =$gravar[1];        
+        $_SESSION['usuario'] =$gravar[1];
+        $_SESSION['email']=$gravar[2]; 
 
         if(isset($_SESSION['usuario'])){
+
+            header('Location: http://localhost/to-do-list/view/telaInicial.php');    
 
               echo"Usuário  ". $_SESSION['usuario']." logado com sucesso";
             
