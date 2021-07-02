@@ -1,3 +1,24 @@
+<?php
+session_start();
+
+
+
+if (isset($_SESSION['nao_autenticado'])) {
+
+    echo "  <div>
+                <p>Usuário ou senha inválidos</p>
+            </div>";
+} else {
+
+
+    unset($_SESSION['nao_autenticado']);
+}
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <!--Doctype informa ao navegador a versão do html que deve ser renderizada-->
 <html lang="pt-br">
@@ -11,32 +32,18 @@
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 
-<?php session_start();?>
-                    
-                        
-<form method=POST action="./Controller/ValidationLogin.php" > 
-
-<p>Email</p>
-<input type='email' name='email'>
-
-<p>Senha</p>
-<input type='text' name='password'>
-
-<input type='submit' name='submeter' value='Testar'>
-
-<?php
-                           if(isset($_SESSION['nao_autenticado'])):
-                         ?>       
-                        <div class="notificacaoDeErro">
-                            <p>Usuário ou senha inválidos</p>
-                        </div>
-                        <?php                        
-                        endif;
-                        unset($_SESSION['nao_autenticado']);
-                        ?>
-
-
-</form>
 
 
 
+<form method=POST action="./Controller/ValidationLogin.php">
+    <p>Email</p>
+    <input type='email' name='email'>
+
+    <p>Senha</p>
+    <input type='text' name='password'>
+
+    <input type='submit' name='submeter' value='Testar'>
+    
+    </form>
+
+    <a href='View/cadastroUsuario.php'>Criar novo Usuário</a>

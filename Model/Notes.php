@@ -1,6 +1,8 @@
 <?php
-
 declare (strict_types=1);
+session_start();
+
+
 
 class Nota{
     /**
@@ -89,16 +91,32 @@ class Nota{
         return $notaFiltrada;
     }
 
-    public function atualizaNotas(){
+    public function atualizaNotas($id,$status,$title,$description){
+        $anotar=new Nota();
+        $anotar->setStatus($status);
+        $anotar->setTitle($title);
+        $anotar->setDescription($description);
+        $anotar->setEmail($_SESSION['email']);
+
+        $dbStatus=$anotar->getStatus();
+        $dbtitle=$anotar->getTitle();
+        $dbdescription=$anotar->getDescription();
+        $dbStatus=$anotar->getStatus();
+        $dbEmail=$anotar->getEmail();
+        
+        $sql = $this->conexao->prepare("update notes set status=:status,title=:title,description=:description WHERE id=$id");
+        
+        $sql->execute(array(
+            ':status'=>$dbStatus,
+            ':title'=>$dbtitle,
+            ':description'=>$dbdescription,           
+        ));
+
 
     }
     public function deletaNotas($id){
-        $sql = $this->conexao->prepare("delete from notes WHERE id=$id");
+        $sql = $this->conexao->prepare("delete from notes  WHERE id=$id");
         $sql->execute();
-       
-
-    
-    
     }
     public function criarNota($status,$title,$description){
 
@@ -116,7 +134,6 @@ class Nota{
         $dbStatus=$anotar->getStatus();
         $dbEmail=$anotar->getEmail();
 
-       
 
             
         $sql = $this->conexao->prepare("INSERT into notes (status,title,description,email)  VALUES(:status,:title,:description,:email)");
@@ -126,6 +143,8 @@ class Nota{
             ':description'=>$dbdescription,
             ':email'=>$dbEmail
         ));
+
+        
     }
 
 

@@ -56,7 +56,13 @@ class VisualizacaoDeNotas{
     {
         $this->nota->deletaNotas($id);
         return "A nota foi apagada";
-        header('Location: /to-do-list/view/telaInicial.php');
+        
+    }
+    public function atualizarNota($id,$status,$title,$description)
+    {
+        $this->nota->atualizaNotas($id,$status,$title,$description);
+       
+        
     }
 
 

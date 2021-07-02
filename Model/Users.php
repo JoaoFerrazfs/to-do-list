@@ -70,6 +70,13 @@ class User{
         $this->password = $p;
 
     }
+    public function getFone(){
+        return $this->id;
+
+    }
+    public function setFone($f){
+        $this->fone = $f;
+    }
 
 
 
@@ -92,10 +99,36 @@ class User{
           return array($id,$name,$email,$password);
             
 
+        }
+    }
+
+    public function insereUsuario($name,$age,$email,$fone,$password) 
+    {
+        echo $name;
+        $usuario=new User();
+        $usuario->setName($name);
+        $usuario->setAge($age);        
+        $usuario->setEmail($email);  
+        $usuario->setFone($fone);     
+        $usuario->setPassword($password);
+
+        $dbname=$usuario->getName();
+        $dbfone=$usuario->getFone();
+        $dbage=$usuario->getAge();
+        $dbemail=$usuario->getEmail();
+        $dbpassword=$usuario->getPassword();
+
+        $sql = $this->conexao->prepare("INSERT into users (name,age,email,fone,password)  VALUES('$dbname','$dbage','$dbemail','$dbfone','$dbpassword')");
+        $sql->execute();
+
+        var_dump($sql);
+
+        echo $dbage;
+
     }
 
    
            
 
 
-}}
+}
