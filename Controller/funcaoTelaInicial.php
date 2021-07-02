@@ -24,16 +24,41 @@ class VisualizacaoDeNotas{
         $email =$_SESSION['email'];
   
          $notas=$this->nota->buscaNotas($email,$status);
+         
          $linhas = count($notas);
+
         $i = 0;
+
         echo "<h2>".$status."</h2>";
+
         for ($i = 0; $i < count($notas); $i++) {
+
         $title = $notas[$i]['title'];
-        echo  "<button style='box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)'>$title</button>";
+        $id=$notas[$i]['id'];
+       
+
+        echo  "<a href='/to-do-list/view/exibirNota.php?id=$id'> <button style='margin-left:25px;width: 120px;background: #069cc2; border-radius: 5px; padding: 10px; cursor: pointer; color: #fff; border: none; font-size: 16px;'>$title</button></a> ";
         echo "<br><br>";
+        }   
     }
-}
+
+    public function mostraNotasId($id)
+
+    {
+        $notas = $this->nota->buscaNotasFiltroID($id);
+        
+
+      return $notas ;
+
+    }
+
+    public function apagarNotas($id)
+    {
+        $this->nota->deletaNotas($id);
+        return "A nota foi apagada";
+        header('Location: /to-do-list/view/telaInicial.php');
+    }
+
 
 }
 
-$teste=new VisualizacaoDeNotas;

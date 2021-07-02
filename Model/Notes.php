@@ -72,28 +72,60 @@ class Nota{
         $sql->execute();
         $resultado=[];
         $value = $sql->fetchAll(PDO::FETCH_ASSOC);
-        
-           
-            $anotar=new Nota();
-            $anotar->setTodasNotas($value);       
-
-            $todasNotas=$anotar->getTodasNotas();           
-           
-            return $todasNotas;
-
-        
-    
-
-    
+        $anotar=new Nota();
+        $anotar->setTodasNotas($value); 
+        $todasNotas=$anotar->getTodasNotas();
+        return $todasNotas;
+    }
+    public function buscaNotasFiltroID($id){
+        $sql = $this->conexao->prepare("SELECT id,email,description,status,title FROM notes WHERE id=$id");
+        $sql->execute();
+        $resultado=[];
+        $value = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $anotar=new Nota();
+        $anotar->setTodasNotas($value); 
+        $notaFiltrada=$anotar->getTodasNotas();
+       
+        return $notaFiltrada;
     }
 
     public function atualizaNotas(){
 
     }
-    public function deletaNotas(){
+    public function deletaNotas($id){
+        $sql = $this->conexao->prepare("delete from notes WHERE id=$id");
+        $sql->execute();
+       
 
+    
+    
     }
-    public function criarNota(){
+    public function criarNota($status,$title,$description){
+
+      
+
+        $anotar=new Nota();
+        $anotar->setStatus($status);
+        $anotar->setTitle($title);
+        $anotar->setDescription($description);
+        $anotar->setEmail($_SESSION['email']);
+
+        $dbStatus=$anotar->getStatus();
+        $dbtitle=$anotar->getTitle();
+        $dbdescription=$anotar->getDescription();
+        $dbStatus=$anotar->getStatus();
+        $dbEmail=$anotar->getEmail();
+
+       
+
+            
+        $sql = $this->conexao->prepare("INSERT into notes (status,title,description,email)  VALUES(:status,:title,:description,:email)");
+        $sql->execute(array(
+            ':status'=>$dbStatus,
+            ':title'=>$dbtitle,
+            ':description'=>$dbdescription,
+            ':email'=>$dbEmail
+        ));
     }
 
 
