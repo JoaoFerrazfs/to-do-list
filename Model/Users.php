@@ -120,11 +120,7 @@ class User{
 
         $sql = $this->conexao->prepare("INSERT into users (name,age,email,fone,password)  VALUES('$dbname','$dbage','$dbemail','$dbfone','$dbpassword')");
         $sql->execute();
-
-        var_dump($sql);
-
-        echo $dbage;
-
+       
     }
 
    

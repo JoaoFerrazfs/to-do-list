@@ -22,23 +22,14 @@ class VisualizacaoDeNotas{
 
     {
         $email =$_SESSION['email'];
-  
-         $notas=$this->nota->buscaNotas($email,$status);
-         
+         $notas=$this->nota->buscaNotas($email,$status);         
          $linhas = count($notas);
-
         $i = 0;
-
-        echo "<h2>".$status."</h2>";
-
         for ($i = 0; $i < count($notas); $i++) {
-
         $title = $notas[$i]['title'];
-        $id=$notas[$i]['id'];
-       
-
-        echo  "<a href='/to-do-list/view/exibirNota.php?id=$id'> <button style='margin-left:25px;width: 120px;background: #069cc2; border-radius: 5px; padding: 10px; cursor: pointer; color: #fff; border: none; font-size: 16px;'>$title</button></a> ";
-        echo "<br><br>";
+        $id=$notas[$i]['id'];   
+        echo  "<a href='/to-do-list/view/exibirNota.php?id=$id' class='col-md-7 container-fluid'>$title</a> ";
+        
         }   
     }
 

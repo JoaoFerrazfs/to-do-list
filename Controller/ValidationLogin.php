@@ -23,7 +23,10 @@ class Login{
         $gravar= $dados->validarLogin($email,$password);
 
         $_SESSION['usuario'] =$gravar[1];
-        $_SESSION['email']=$gravar[2]; 
+        $_SESSION['email']=$gravar[2];
+     
+
+        
 
         if(isset($_SESSION['usuario'])){
 

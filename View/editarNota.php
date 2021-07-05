@@ -15,69 +15,130 @@ foreach ($nota as $value){
    
 }
 
-echo "$status. <br>
-$title.<br>
-$email.<br>
-$description";
-
-echo "<a href='/to-do-list/view/telaInicial.php'>Tela Inicial</a>";
 
 if (isset($_POST['editar'])) {   
     $status= $_POST['status'] ;
     $title= $_POST['title'] ;
     $description= $_POST['description'] ;
+    
     $notas->atualizarNota($id,$status,$title,$description);
     header('Location:http://localhost/to-do-list/view/telaInicial.php');
   
 } 
 
 
-
 ?>
 
+
+
+
 <!DOCTYPE html>
-<!--Doctype informa ao navegador a versão do html que deve ser renderizada-->
+
 <html lang="pt-br">
 
 <head>
-    <title>HelpDesk</title>
+    <title>Exibir chamado</title>
     <meta charset="utf-8">
-    <meta name="author" content="João">
-    <meta name="description" content="lista de documentos">
-    <meta name="keywords" content="html5, tecnologia">
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 
-<body>
+
+
+<body class="body container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"> <?php echo $_SESSION['usuario'] ?></a>
+            <img src="../img/post-it.png" alt="" width="20" height="20">
+            <a class="navbar-brand" href="#">Perfil</a>
+    </nav>
+
+    <nav class="tarefas">
 
 
 
-<form method=POST> 
-        <?php 
-           echo "<input type='text' name='status' value ='$status' ID='AA'> </input>
-            <input type='text' name='title' value='$title' > </input>
-            <input type='text' name='description' value='$description' > </input>
-            <input type='submit' value='enviar' name='editar'> "
-        ?>
+        <form method="post">
+            <div class="row mb-1 container-fluid text-center ">
+                <div class="col-md-12 ">
 
-</form>
+                    <div class="container-fluid">
 
+                        <div class="container-fluid status ">
+                            <p>Informações do Chamado</p>
+                        </div>
+                        <div class="andamento notas mb-5 ">
+                            <div class="input-group input-group mb-3 text-center">
+                                <span class="input-group-text">Título</span>
+                                <input type="text" class="form-control" value="<?php echo $title ?>" name="title">
+                            </div>
+
+                            <div class="input-group input-group mb-3">
+                                <span class="input-group-text">Descrição</span>
+                                <textarea class="form-control" name="description" rows="3"> <?php echo $description ?></textarea>
+                            </div>
+                     
+                            <div class=" col-lg-4 container-fluid " style="margin-top: 10px;">
+                                <input class="form-control" list="datalistOptions" name="status"  value="<?php echo $value['status']; ?>">
+                                <datalist name="status" >
+
+                                    <option value="Aberto">
+                                    <option value="Em andamento">
+                                    <option value="Feito">
+                                    
+                                </datalist>
+                            </div>
+                            <div class="row col-md-12  container-fluid text-center  ">
+                                <div class="col-md-1 container-fluid">
+                                    <button class="btn btn-success"  type='submit' value='enviar' name='editar'> Confirmar Edição </button>
+                                </div>
+                                <div class="col-md-1 container-fluid">
+                                    <a class="btn btn-success" href="telaInicial.php" role="button">Voltar</a>
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+
+
+                </div>
+        </form>
+        </div>
+
+    </nav>
+
+
+    </div>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom ">
+        <div class="container-fluid ">
+
+
+            <a class="navbar-brand " href="# ">Logout</a>
+    </nav>
+
+
+
+
+
+    <form method=POST>
+
+
+    </form>
 
 </body>
 
-
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
