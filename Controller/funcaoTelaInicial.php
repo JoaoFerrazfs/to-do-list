@@ -28,7 +28,7 @@ class VisualizacaoDeNotas{
         for ($i = 0; $i < count($notas); $i++) {
         $title = $notas[$i]['title'];
         $id=$notas[$i]['id'];   
-        echo  "<a href='/to-do-list/view/exibirNota.php?id=$id' class='col-md-7 container-fluid'>$title</a> ";
+        echo  "<a href='/to-do-list/view/exibirNota.php?id=$id' class='container-fluid btn' style='width:50%'>$title </a> ";
         
         }   
     }

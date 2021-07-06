@@ -42,7 +42,7 @@ $notas=new VisualizacaoDeNotas();
                     <p>Novas tarefas</p>
                 </div>
                     <?php                     
-                        $notas->mostraNotas('Nova');
+                        $notas->mostraNotas('Aberto');
                     ?>
                 </div>
 
@@ -67,7 +67,7 @@ $notas=new VisualizacaoDeNotas();
                         <p>Finalizadas</p>
                     </div>
                     <?php                     
-                        $notas->mostraNotas('Feito');
+                        $notas->mostraNotas('Fechado');
                     ?>
                 </div>
 

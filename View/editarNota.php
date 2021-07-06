@@ -69,18 +69,17 @@ if (isset($_POST['editar'])) {
                         <div class="andamento notas mb-5 ">
                             <div class="input-group input-group mb-3 text-center">
                                 <span class="input-group-text">Título</span>
-                                <input type="text" class="form-control" value="<?php echo $title ?>" name="title">
+                                <input type="text" class="form-control" value="<?php echo $title ?>" name="title" required>
                             </div>
 
                             <div class="input-group input-group mb-3">
                                 <span class="input-group-text">Descrição</span>
-                                <textarea class="form-control" name="description" rows="3"> <?php echo $description ?></textarea>
+                                <textarea class="form-control" name="description" rows="3" required > <?php echo $description ?></textarea>
                             </div>
                      
                             <div class=" col-lg-4 container-fluid " style="margin-top: 10px;">
-                                <input class="form-control" list="datalistOptions" name="status"  value="<?php echo $value['status']; ?>">
-                                <datalist name="status" >
-
+                                <input class="form-control" list="datalistOptions" name="status" required>
+                                <datalist id="datalistOptions" required>
                                     <option value="Aberto">
                                     <option value="Em andamento">
                                     <option value="Feito">

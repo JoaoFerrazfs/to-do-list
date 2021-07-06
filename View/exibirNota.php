@@ -4,7 +4,7 @@ require_once(__ROOT__ . '../Controller/funcaoTelaInicial.php');
 
 $id = $_GET['id'];
 $notas = new VisualizacaoDeNotas();
-$nota = $notas->mostraNotasId($id);
+$nota = $notas->mostraNotasId($_GET['id']);
 
 foreach ($nota as $value) {
     $status = $value['status'];
@@ -45,7 +45,7 @@ if (isset($_POST['apagar'])) {
     </nav>
 
     <nav class="tarefas">
-        <form method="post ">
+        <form method=POST>
             <div class="row mb-1  text-center ">
                 <div class="col-md-12 ">
 
@@ -57,16 +57,16 @@ if (isset($_POST['apagar'])) {
                         <div class="andamento notas mb-5 ">
                             <div class="input-group input-group mb-3 text-center">
                                 <span class="input-group-text">Título</span>
-                                <input type="text" class="form-control" value="<?php echo $title ?>" name="title">
+                                <input type="text" class="form-control" value="<?php echo $title ?>" name="title" readonly=“true”>
                             </div>
 
                             <div class="input-group input-group mb-3">
                                 <span class="input-group-text">Descrição</span>
-                                <textarea class="form-control" name="descricao" rows="3"> <?php echo $description ?></textarea>
+                                <textarea class="form-control" name="descricao" rows="3" readonly=“true”> <?php echo $description ?></textarea>
                             </div>
 
                             <div class=" col-lg-4 container-fluid " style="margin-top: 10px;">
-                                <input class="form-control" list="datalistOptions" name="status" placeholder="<?php echo $value['status']; ?>">
+                                <input class="form-control" list="datalistOptions" name="status" placeholder="<?php echo $value['status']; ?>" readonly=“true”>
                                 <datalist name="status">
                                     <option value="Aberto">
                                     <option value="Em andamento">
@@ -76,11 +76,10 @@ if (isset($_POST['apagar'])) {
                             <div class="row col-md-12  container-fluid">
 
                                 <div class="col-md-4 container-fluid">
-                                    <button type='submit' class="btn btn-danger" name='apagar' value='Apagar'>Apagar</button>
+                                    <button type='submit' class="btn btn-danger" name='apagar' >Apagar</button>
 
                                 </div>
                                 <div class="col-md-4 container-fluid">
-
                                     <?php $id = $_GET['id'];
                                     echo  "<a class='container ' href='/to-do-list/view/editarNota.php?id=$id'> Editar Nota</a> "; ?>
                                 </div>
@@ -136,3 +135,14 @@ if (isset($_POST['apagar'])) {
 </body>
 
 </html>
+
+
+<?php
+
+if (isset($_POST['apagar'])) {
+    $notas->apagarNotas($_GET['id']);
+    header('Location: /to-do-list/view/telaInicial.php');
+}
+
+
+?>
